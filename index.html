@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conteo y Clasificación de Células</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 700px;
+            padding: 0 20px;
+            background: #f7f9fc;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        form {
+            margin: 30px 0;
+            text-align: center;
+        }
+        input[type="file"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .resultado {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 6px;
+            border: 1px solid #b3d1ff;
+        }
+        .resultado strong {
+            color: #2c3e50;
+        }
+        img#resultado-img {
+            display: block;
+            margin: 25px auto;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 2px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conteo y Clasificación de Células - Cámara de Neubauer</h1>
+
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required />
+        <br/>
+        <input type="submit" value="Subir Imagen y Analizar" />
+    </form>
+
+    {% if resultado %}
+    <div class="resultado">
+        <strong>Resultado:</strong>
+        <p>{{ resultado|safe }}</p>
+        {% if imagen_url %}
+            <img id="resultado-img" src="{{ imagen_url }}" alt="Imagen Procesada" />
+        {% endif %}
+    </div>
+    {% endif %}
+
+</body>
+</html>
